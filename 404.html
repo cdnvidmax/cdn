@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script type="text/javascript">
+    // Mengambil nama file dari jalur URL yang salah (404) dan mengirimkannya ke index.html
+    var pathSegments = window.location.pathname.split('/');
+    var fileName = pathSegments[pathSegments.length - 1];
+    if (fileName && fileName.endsWith('.mp4')) {
+      window.location.href = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/') + '/?v=' + fileName;
+    } else {
+      document.write('File tidak ditemukan.');
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
