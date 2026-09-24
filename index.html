@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Player</title>
+  <style>
+    body {
+      background-color: #000000;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      background-color: #0d0d0d;
+      padding-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    video {
+      width: 100%;
+      display: block;
+    }
+    .next-link {
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 15px;
+      transition: color 0.2s ease;
+    }
+    .next-link:hover {
+      color: #60a5fa;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-wrapper">
+    <!-- Mengambil Video MP4 dari GitHub Pages Anda -->
+    <video controls autoplay muted>
+      <source src="https://github.io" type="video/mp4">
+      Browser Anda tidak mendukung pemutar video ini.
+    </video>
+
+    <!-- Tautan Teks di Bawah Kontrol Video (Silakan ganti link youtube dengan link tujuan Anda) -->
+    <a href="https://youtube.com" target="_blank" class="next-link">
+      Lihat selanjutnya
+    </a>
+  </div>
+
+</body>
+</html>
 
