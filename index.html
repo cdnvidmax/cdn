@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Player</title>
+  <title>Video Player Otomatis</title>
   <style>
     body {
       background-color: #000000;
@@ -40,23 +40,51 @@
       color: #60a5fa;
       text-decoration: underline;
     }
+    .error-msg {
+      color: #ef4444;
+      padding: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
   <div class="video-wrapper">
-    <!-- Mengambil Video MP4 dari GitHub Pages Anda -->
-    <video controls autoplay muted>
-      <source src="https://github.io" type="video/mp4">
+    <!-- Pemutar Video -->
+    <video id="myVideo" controls autoplay muted>
+      <source id="videoSource" type="video/mp4">
       Browser Anda tidak mendukung pemutar video ini.
     </video>
 
-    <!-- Tautan Teks di Bawah Kontrol Video (Silakan ganti link youtube dengan link tujuan Anda) -->
+    <!-- Tombol Otomatis di Bawah Kontrol Video -->
     <a href="https://youtube.com" target="_blank" class="next-link">
-      NEXT VID HERE
+      Lihat selanjutnya
     </a>
+    
+    <div id="errorBox" class="error-msg" style="display:none;">
+      Masukkan nama file video di URL. Contoh: ?v=namafile.mp4
+    </div>
   </div>
+
+  <script>
+    // Mengambil nama file video secara otomatis dari parameter URL (?v=namafile.mp4)
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoName = urlParams.get('v');
+
+    const videoElement = document.getElementById('myVideo');
+    const sourceElement = document.getElementById('videoSource');
+    const errorBox = document.getElementById('errorBox');
+
+    if (videoName) {
+      // Mengarahkan sumber video ke file mp4 yang ada di folder repositori GitHub Anda
+      sourceElement.src = videoName;
+      videoElement.load();
+    } else {
+      // Jika tidak memasukkan parameter video, tampilkan pesan petunjuk
+      videoElement.style.display = 'none';
+      errorBox.style.display = 'block';
+    }
+  </script>
 
 </body>
 </html>
-
