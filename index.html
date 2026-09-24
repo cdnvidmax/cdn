@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Player Otomatis</title>
+  <title>CDN Video Player</title>
   <style>
+    /* Mode Gelap Total Sesuai Screenshot */
     body {
       background-color: #000000;
       margin: 0;
@@ -13,76 +14,79 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-    .video-wrapper {
+    .container {
       width: 100%;
-      max-width: 800px;
+      max-width: 850px;
       background-color: #0d0d0d;
-      padding-bottom: 25px;
+      padding-bottom: 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
     video {
       width: 100%;
       display: block;
+      background-color: #000;
     }
-    .next-link {
+    /* Link Biru Minimalis "Lihat selanjutnya" */
+    .btn-next {
       color: #3b82f6;
       text-decoration: none;
       font-size: 15px;
       font-weight: 500;
-      margin-top: 15px;
+      margin-top: 18px;
       transition: color 0.2s ease;
     }
-    .next-link:hover {
+    .btn-next:hover {
       color: #60a5fa;
       text-decoration: underline;
     }
-    .error-msg {
+    .error-text {
       color: #ef4444;
-      padding: 20px;
+      padding: 30px;
       text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <div class="video-wrapper">
-    <!-- Pemutar Video -->
-    <video id="myVideo" controls autoplay muted>
+  <div class="container">
+    <video id="videoPlayer" controls autoplay muted>
       <source id="videoSource" type="video/mp4">
       Browser Anda tidak mendukung pemutar video ini.
     </video>
 
-    <!-- Tombol Otomatis di Bawah Kontrol Video -->
-    <a href="https://youtube.com" target="_blank" class="next-link">
+    <!-- Tombol menuju YouTube -->
+    <a href="https://youtube.com" target="_blank" class="btn-next" id="actionLink">
       Lihat selanjutnya
     </a>
-    
-    <div id="errorBox" class="error-msg" style="display:none;">
-      Masukkan nama file video di URL. Contoh: ?v=namafile.mp4
+
+    <div id="noVideoMsg" class="error-text" style="display:none;">
+      Silakan panggil file video pada URL. Contoh: /namafile.mp4
     </div>
   </div>
 
   <script>
-    // Mengambil nama file video secara otomatis dari parameter URL (?v=namafile.mp4)
+    // Membaca parameter URL otomatis
     const urlParams = new URLSearchParams(window.location.search);
-    const videoName = urlParams.get('v');
+    const videoFile = urlParams.get('v');
 
-    const videoElement = document.getElementById('myVideo');
-    const sourceElement = document.getElementById('videoSource');
-    const errorBox = document.getElementById('errorBox');
+    const player = document.getElementById('videoPlayer');
+    const source = document.getElementById('videoSource');
+    const linkBtn = document.getElementById('actionLink');
+    const errorMsg = document.getElementById('noVideoMsg');
 
-    if (videoName) {
-      // Mengarahkan sumber video ke file mp4 yang ada di folder repositori GitHub Anda
-      sourceElement.src = videoName;
-      videoElement.load();
+    if (videoFile) {
+      // Masukkan video mp4 dari repositori statis secara dinamis
+      source.src = videoFile;
+      player.load();
     } else {
-      // Jika tidak memasukkan parameter video, tampilkan pesan petunjuk
-      videoElement.style.display = 'none';
-      errorBox.style.display = 'block';
+      player.style.display = 'none';
+      linkBtn.style.display = 'none';
+      errorMsg.style.display = 'block';
     }
   </script>
 
